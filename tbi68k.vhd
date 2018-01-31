@@ -1,4 +1,24 @@
 -- This file was generated with hex2rom written by Daniel Wallner
+--
+-- Tiny Basic for the 68000
+-- Gordon Brandly
+--
+-- from the readme file:
+--      Thank  you  for your interest in my version of  Tiny  BASIC.  
+-- This  disk  contains all of the files mentioned in my article  in 
+-- Dr.  Dobb's Journal, plus many more.  The Tiny BASIC on this disk 
+-- (TBI68K.ASM,  HEX) is version 1.2, which has an enhancement added 
+-- by  Marvin  Lipford.   The PRINT statement now has a  '$'  option 
+-- which  allows  you to send control characters to  your  terminal.  
+-- For instance, if your terminal uses a sequence like
+--          <ESC> = <y+32> <x+32>
+-- to move the cursor, you could use a statement like
+--          PRINT $27,'=',$Y+32,$X+32,
+-- to move your cursor to the position pointed to by the variables X 
+-- and Y.
+--     Version 1.2 also fixes a bug in the multiply routine MULT32.
+-- This bug was discovered and fixed by  Rick Murray of  Sacramento,
+-- California.
 
 library IEEE;
 use IEEE.std_logic_1164.all;
