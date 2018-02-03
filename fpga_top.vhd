@@ -1,9 +1,11 @@
--- This package defines a standard for designers to use in describing
--- the interconnection data types used in VHDL modeling.
--- Defines std_logic types and related functions.
+-- TOP level for 68000 computer
+-- 
+-- 
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
+-- pragma synthesis_off
 library mini_uart;
+-- pragma synthesis_on
 
 
 entity fpga_top is
@@ -13,7 +15,8 @@ entity fpga_top is
         RXD0    : in std_logic;
         TXD0    : out std_logic;
         RXD1    : in std_logic;
-        TXD1    : out std_logic
+        TXD1    : out std_logic;
+        reset_out_n : out std_logic
         );
 end fpga_top;
 
@@ -157,7 +160,8 @@ begin
     
     
     --clk <= clk_in;
-    reset <= reset_n;
+    reset <= reset_n; -- this is terrible fix
+    reset_out_n <= reset_n;
     cpu_clkena_in <= '1'; -- no work if set to zero
     cpu_IPL <= "111";
     cpu_dtack <= '0'; -- dtack grounded, memory always ready
