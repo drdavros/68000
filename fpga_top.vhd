@@ -16,7 +16,9 @@ entity fpga_top is
         TXD0    : out std_logic;
         RXD1    : in std_logic;
         TXD1    : out std_logic;
-        reset_out_n : out std_logic
+        reset_out_n : out std_logic;
+        led1    : out std_logic;
+        led2    : out std_logic
         );
 end fpga_top;
 
@@ -67,6 +69,9 @@ architecture rtl of fpga_top is
     signal clk1             : std_logic := '0';
     
     signal Bite             : std_logic_vector(1 downto 0);
+    
+    signal light            : std_logic;
+    signal counter          : integer range 0 to 15000000;
     
     component TG68 is
         port(        
@@ -158,6 +163,21 @@ begin
         end if;
     end process;
     
+    -- blinky light please
+    process (reset_n, clk)
+    begin
+        if (reset_n = '0') then
+            light <= '0';
+            counter <= 0;
+        elsif rising_edge(clk) then
+            counter <= counter + 1;
+            if counter = 0 then
+                light <= not (light);
+            end if;
+        end if;
+    end process;
+    led1 <= reset_n;
+    led2 <= light;
     
     --clk <= clk_in;
     reset <= reset_n; -- this is terrible fix
